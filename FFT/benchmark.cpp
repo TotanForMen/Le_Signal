@@ -3,11 +3,11 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include "FFT.cpp"
-#define START 20
-#define AMOUNT 4
+#define START 0
+#define AMOUNT 20
 #define STOP START+AMOUNT
 void benchmark(void (*func)(int)){
-	int const REPEAT = 10;
+	int const REPEAT = 50;
 	double results[AMOUNT];
 	std::cout << std::endl << std::endl;
 	std::cout << "n\ttime (sec)\n";
@@ -27,15 +27,15 @@ void benchmark(void (*func)(int)){
 
 	 
 }
-Le_complex<double>* comp;
+Le_complex* comp;
 short* data;
 void wrapper_solve_FFT(int n){
 	Le_FFT::FFT(data,comp,n);
 }
-int main()
+int main(int argn,char** argv)
 {
 	data=(short*)malloc((1<<STOP)*sizeof(short));
-	comp=(Le_complex<double>*)malloc((1<<STOP)*sizeof(Le_complex<double>));
+	comp=(Le_complex*)malloc((1<<STOP)*sizeof(Le_complex));
 	benchmark(wrapper_solve_FFT);
 	return 0;
 }

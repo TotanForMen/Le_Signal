@@ -1,11 +1,11 @@
 #include "Le_complex.cpp"
 namespace Le_FFT{
-	void FFT(short* input,Le_complex<double>* output,int size){	//number of samples=2^size
+	void FFT(short* input,Le_complex* output,int size){	//number of samples=2^size
 		short *short_dp1,*short_dp2;
-		Le_complex<double> *complex_dp1,*complex_dp2;
-		Le_complex<double> Le_2PI(0.0,-M_PI*2.0);
-		Le_complex<double> Le_W;
-		complex_dp1=(Le_complex<double>*)malloc(sizeof(Le_complex<double>)<<size);
+		Le_complex *complex_dp1,*complex_dp2;
+		Le_complex Le_2PI(0.0,-M_PI*2.0);
+		Le_complex Le_W;
+		complex_dp1=(Le_complex*)malloc(sizeof(Le_complex)<<size);
 		short_dp1=input;short_dp2=(short*)complex_dp1;
 		for(int i=size-1;i>0;i--){
 			for(unsigned int j=0;j < 1<<(size-i);j++){
@@ -19,8 +19,8 @@ namespace Le_FFT{
 			short_dp1=(short*)((long int)short_dp1 ^ (long int)short_dp2);
 		}
 		for(int i=0;i < 1<<(size-1);i++){
-			output[i<<1]=Le_complex<double>((double)(short_dp1[i<<1]+short_dp1[(i<<1)+1]),0.0);
-			output[(i<<1)+1]=Le_complex<double>((double)(short_dp1[i<<1]-short_dp1[(i<<1)+1]),0.0);
+			output[i<<1]=Le_complex((double)(short_dp1[i<<1]+short_dp1[(i<<1)+1]),0.0);
+			output[(i<<1)+1]=Le_complex((double)(short_dp1[i<<1]-short_dp1[(i<<1)+1]),0.0);
 		}
 		complex_dp2=complex_dp1;
 		for(int i=0;i<size-1;i++){
@@ -42,7 +42,7 @@ namespace Le_FFT{
 		}
 		free(complex_dp1);
 	}
-	void FFT_Print(Le_complex<double>* output,int size){
+	void FFT_Print(Le_complex* output,int size){
 		for(int i=0;i<size;i++){
 		output[i].print();
 	}

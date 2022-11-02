@@ -2,12 +2,11 @@
 #define LE_COMPLEX 0
 #include<iostream>
 #include<math.h>
-template<typename T>
 class Le_complex{
 	private:
-		T real,img;
+		double real,img;
 	public:
-		Le_complex(T real,T img){
+		Le_complex(double real,double img){
 			this->real=real;
 			this->img=img;
 		}
@@ -21,7 +20,7 @@ class Le_complex{
 			Le_complex result(this->real*b.real-this->img*b.img,this->real*b.img+this->img*b.real);
 			return result;
 		}
-		Le_complex operator*(T b){
+		Le_complex operator*(double b){
 			Le_complex result(this->real*b,this->img*b);
 			return result;
 		}
@@ -33,7 +32,7 @@ class Le_complex{
 			Le_complex result(this->real-b.real,this->img-b.img);
 			return result;
 		}
-		Le_complex operator/(T b){
+		Le_complex operator/(double b){
 			Le_complex result(this->real/b,this->img/b);
 			return result;
 		}
@@ -49,6 +48,12 @@ class Le_complex{
 		}
 		void print(){
 			std::cout << "real:" << this->real << "\timg:" << this->img << std::endl;
+		}
+		void printAbs(){
+			std::cout << "abs:" << std::sqrt(this->real*this->real+this->img*this->img) << std::endl;
+		}
+		void printArg(){
+			std::cout << "arg:" << std::atan(this->img/this->real)<< std::endl;
 		}
 };
 #endif
